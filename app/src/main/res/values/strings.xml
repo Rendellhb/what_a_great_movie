@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Home</string>
+    <string name="login">Login</string>
+    <string name="title_home">Home</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="username">Username</string>
+    <string name="btn_go">Go!</string>
+</resources>
