@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="username">Username</string>
     <string name="btn_go">Go!</string>
+    <string name="login_title">Type your username to access</string>
 </resources>

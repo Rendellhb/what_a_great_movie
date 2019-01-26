@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/parent_login"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-            android:id="@+id/username"
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_username"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:autofillHints="@string/username"
@@ -16,13 +18,13 @@
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintRight_toLeftOf="parent"/>
 
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_go"
-            app:layout_constraintTop_toBottomOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/edit_username"
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintRight_toLeftOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
