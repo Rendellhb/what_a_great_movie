@@ -12,20 +12,19 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.app_title)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        (activity as MainActivity)?.supportActionBar?.title = getString(R.string.app_title)
-
         val regex = "[a-zA-Z0-9_]{0,20}".toRegex()
         edit_username.validate({s -> regex.matches(s)}, getString(R.string.empty_not_allowed))
 
-        edit_username.setOnEditorActionListener { view, actionId, event ->
+        edit_username.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                navigateToHome(view)
+                navigateToHome(v)
             }
             false
         }

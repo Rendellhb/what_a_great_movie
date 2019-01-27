@@ -7,11 +7,14 @@ buildscript {
         supportLibraryVersion = '1.0.2'
         constraintLayoutVersion = '2.0.0-alpha3'
         nav_version = '1.0.0-alpha11'
+        recyclerViewVersion = '1.0.0'
+        lifecycleVersion = '2.0.0'
+        coroutinesVersion = "1.0.1"
     }
     repositories {
         google()
         jcenter()
-        
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
