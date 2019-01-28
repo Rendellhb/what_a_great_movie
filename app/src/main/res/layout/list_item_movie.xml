@@ -15,7 +15,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{clickListener}">
+            android:onClick="@{clickListener}"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small">
 
         <ImageView
                 android:id="@+id/movie_item_image"
@@ -27,7 +29,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_default="percent"
-                app:layout_constraintWidth_percent="0.6"/>
+                app:layout_constraintWidth_percent="0.6"
+                android:background="@color/light_gray"/>
 
         <TextView
                 android:id="@+id/movie_item_title"

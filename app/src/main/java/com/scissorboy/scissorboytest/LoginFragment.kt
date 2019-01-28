@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.scissorboy.scissorboytest.util.validate
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.android.synthetic.main.main_activity.*
 
 class LoginFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -21,6 +22,8 @@ class LoginFragment : Fragment() {
 
         val regex = "[a-zA-Z0-9_]{0,20}".toRegex()
         edit_username.validate({s -> regex.matches(s)}, getString(R.string.empty_not_allowed))
+
+        requireActivity().navigation.visibility = View.GONE
 
         edit_username.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {

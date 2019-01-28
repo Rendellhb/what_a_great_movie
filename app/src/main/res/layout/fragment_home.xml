@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
         <!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
                 <!--android:id="@+id/container"-->
@@ -29,6 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

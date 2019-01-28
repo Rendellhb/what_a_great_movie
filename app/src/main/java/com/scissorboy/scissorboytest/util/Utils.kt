@@ -3,7 +3,11 @@ package com.scissorboy.scissorboytest.util
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.ui.NavigationUI
 
 fun AppCompatEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {

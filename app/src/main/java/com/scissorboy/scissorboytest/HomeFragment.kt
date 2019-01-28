@@ -15,6 +15,7 @@ import com.scissorboy.scissorboytest.model.Movie
 import com.scissorboy.scissorboytest.util.loadJSONFromAsset
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModel
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModelFactory
+import kotlinx.android.synthetic.main.main_activity.*
 
 class HomeFragment : Fragment() {
 
@@ -32,7 +33,9 @@ class HomeFragment : Fragment() {
         binding.movieList.adapter = adapter
         subscribeUi(adapter)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.welcome_home, username)
+        val mainActivity = requireActivity() as MainActivity
+        if (!username.isEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, username)
+        mainActivity.navigation.visibility = View.VISIBLE
         return binding.root
     }
 
