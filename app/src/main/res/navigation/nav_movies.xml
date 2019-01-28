@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/loginFragment">
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@id/loginFragment"
+            android:id="@+id/nav_graph">
+
     <fragment android:id="@+id/loginFragment"
               android:name="com.scissorboy.scissorboytest.LoginFragment"
               android:label="@string/app_title"
@@ -15,6 +17,7 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+
     <fragment android:id="@+id/homeFragment"
               android:name="com.scissorboy.scissorboytest.HomeFragment"
               android:label="fragment_home"
@@ -23,5 +26,14 @@
                 android:name="usernameToShow"
                 android:defaultValue="Unknown"
                 app:argType="string" />
+        <action
+                android:id="@+id/action_homeFragment_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"/>
     </fragment>
+
+    <fragment
+            android:id="@+id/movieDetailFragment"
+            android:name="com.scissorboy.scissorboytest.MovieDetailFragment"
+            android:label="MovieDetailFragment"
+            tools:layout="@layout/fragment_movie_detail"/>
 </navigation>

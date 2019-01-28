@@ -9,7 +9,9 @@ buildscript {
         nav_version = '1.0.0-alpha11'
         recyclerViewVersion = '1.0.0'
         lifecycleVersion = '2.0.0'
-        coroutinesVersion = "1.0.1"
+        coroutinesVersion = '1.0.1'
+        gsonVersion = '2.8.2'
+        glideVersion = '4.8.0'
     }
     repositories {
         google()
@@ -29,7 +31,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
     }
 }
 

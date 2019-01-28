@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">WGM</string>
+    <string name="app_name">WGM</string>
     <string name="app_title" translatable="false">What a great movie!</string>
     <string name="login" translatable="false">Login</string>
     <string name="title_home" translatable="false">Home</string>

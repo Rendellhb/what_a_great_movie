@@ -1,5 +1,6 @@
 package com.scissorboy.scissorboytest.util
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.widget.AppCompatEditText
@@ -21,4 +22,12 @@ fun AppCompatEditText.validate(validator: (String) -> Boolean, message: String) 
         this.error = if (validator(it)) null else message
     }
     this.error = if (validator(this.text.toString())) null else message
+}
+
+fun loadJSONFromAsset(filename: String, context: Context): String {
+    val root_json = context.assets.open(filename).bufferedReader().use{
+        it.readText()
+    }
+
+    return root_json.replace("\n", "")
 }

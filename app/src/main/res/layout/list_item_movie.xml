@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="clickListener"
+                type="android.view.View.OnClickListener" />
+        <variable
+                name="movie"
+                type="com.scissorboy.scissorboytest.model.Movie"/>
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{clickListener}">
+
+        <ImageView
+                android:id="@+id/movie_item_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/movie_item_image_height"
+                android:contentDescription="@string/movie_item_image"
+                android:scaleType="centerCrop"
+                app:imageFromUrl="@{movie.movieThumbUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.6"/>
+
+        <TextView
+                android:id="@+id/movie_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:text="@{movie.movieName}"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.4"
+                tools:text="Matrix"/>
+
+        <Button
+                android:id="@+id/movie_item_favorite"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/favorite"
+                app:layout_constraintTop_toBottomOf="@+id/movie_item_title"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.4"
+                app:layout_constraintLeft_toRightOf="@id/movie_item_image"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
