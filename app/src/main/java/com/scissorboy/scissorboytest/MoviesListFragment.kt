@@ -2,33 +2,30 @@ package com.scissorboy.scissorboytest
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.scissorboy.scissorboytest.adapters.MoviesAdapter
-import com.scissorboy.scissorboytest.databinding.FragmentHomeBinding
-import com.scissorboy.scissorboytest.model.Movie
+import com.scissorboy.scissorboytest.databinding.FragmentMoviesListBinding
 import com.scissorboy.scissorboytest.util.StaticObjects
-import com.scissorboy.scissorboytest.util.loadJSONFromAsset
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModel
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModelFactory
 import kotlinx.android.synthetic.main.main_activity.*
 
-class HomeFragment : Fragment() {
+class MoviesListFragment : Fragment() {
 
     private lateinit var viewModel: MovieViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val binding = FragmentMoviesListBinding.inflate(inflater, container, false)
         val username = StaticObjects.username
-        val jsonString = loadJSONFromAsset("movies.json", requireActivity())
-        val movies = parseMovieJson(jsonString)
-        val factory = MovieViewModelFactory(movies)
+        val factory = MovieViewModelFactory(username)
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
+
+        setHasOptionsMenu(true)
 
         val adapter = MoviesAdapter()
         binding.movieList.adapter = adapter
@@ -56,8 +53,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun parseMovieJson(jsonString: String): List<Movie> {
-        val listType = object : TypeToken<List<Movie>>() { }.type
-        return Gson().fromJson<List<Movie>>(jsonString, listType)
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        menu?.findItem(R.id.logout)?.isVisible = true
+        super.onPrepareOptionsMenu(menu)
     }
 }

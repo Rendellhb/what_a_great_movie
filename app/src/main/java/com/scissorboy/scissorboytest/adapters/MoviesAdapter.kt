@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.scissorboy.scissorboytest.HomeFragmentDirections
+import com.scissorboy.scissorboytest.MoviesListFragmentDirections
 import com.scissorboy.scissorboytest.databinding.ListItemMovieBinding
 import com.scissorboy.scissorboytest.model.Movie
 
@@ -26,7 +26,7 @@ class MoviesAdapter : ListAdapter<Movie, ViewHolder>(MovieDiffCallback()) {
 
     private fun createDetailOnClickListener(movieId: String): View.OnClickListener {
         return View.OnClickListener {
-            val directions = HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment()
+            val directions = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailFragment()
             it.findNavController().navigate(directions)
         }
     }

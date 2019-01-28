@@ -12,6 +12,7 @@ buildscript {
         coroutinesVersion = '1.0.1'
         gsonVersion = '2.8.2'
         glideVersion = '4.8.0'
+        retrofitVersion = '2.5.0'
     }
     repositories {
         google()

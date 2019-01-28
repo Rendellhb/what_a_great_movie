@@ -4,6 +4,9 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.widget.AppCompatEditText
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.scissorboy.scissorboytest.model.Movie
 
 fun AppCompatEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {
@@ -30,6 +33,11 @@ fun loadJSONFromAsset(filename: String, context: Context): String {
     }
 
     return root_json.replace("\n", "")
+}
+
+fun parseMovieJson(jsonString: String): List<Movie> {
+    val listType = object : TypeToken<List<Movie>>() { }.type
+    return Gson().fromJson<List<Movie>>(jsonString, listType)
 }
 
 class StaticObjects {
