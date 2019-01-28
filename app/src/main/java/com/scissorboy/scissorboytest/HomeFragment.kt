@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken
 import com.scissorboy.scissorboytest.adapters.MoviesAdapter
 import com.scissorboy.scissorboytest.databinding.FragmentHomeBinding
 import com.scissorboy.scissorboytest.model.Movie
+import com.scissorboy.scissorboytest.util.StaticObjects
 import com.scissorboy.scissorboytest.util.loadJSONFromAsset
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModel
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModelFactory
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val username = HomeFragmentArgs.fromBundle(arguments!!).usernameToShow
+        val username = StaticObjects.username
         val jsonString = loadJSONFromAsset("movies.json", requireActivity())
         val movies = parseMovieJson(jsonString)
         val factory = MovieViewModelFactory(movies)

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.scissorboy.scissorboytest.util.StaticObjects
 import com.scissorboy.scissorboytest.util.validate
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.main_activity.*
@@ -39,6 +40,7 @@ class LoginFragment : Fragment() {
 
     fun navigateToHome(view : View?) {
         if (edit_username.error == null) {
+            StaticObjects.username = edit_username.text.toString()
             val directions = LoginFragmentDirections.actionLoginFragmentToHomeFragment().setUsernameToShow(edit_username.text.toString())
             view?.findNavController()?.navigate(directions)
         }

@@ -16,16 +16,13 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
-
-        <action
-                android:id="@+id/action_loginFragment_to_homeFragment_2"
-                app:destination="@id/homeFragment"/>
     </fragment>
 
     <fragment android:id="@+id/homeFragment"
               android:name="com.scissorboy.scissorboytest.HomeFragment"
               android:label="fragment_home"
               tools:layout="@layout/fragment_home">
+
         <argument
                 android:name="usernameToShow"
                 android:defaultValue="Unknown"
@@ -33,9 +30,6 @@
         <action
                 android:id="@+id/action_homeFragment_to_movieDetailFragment"
                 app:destination="@id/movieDetailFragment"/>
-        <action
-                android:id="@+id/action_homeFragment_to_favoriteFragment"
-                app:destination="@id/favoriteFragment"/>
     </fragment>
 
     <fragment
@@ -52,6 +46,5 @@
     <fragment
               android:id="@+id/favoriteFragment"
               android:name="com.scissorboy.scissorboytest.FavoriteFragment"
-              android:label="FavoriteFragment"
               tools:layout="@layout/fragment_favorite"/>
 </navigation>
