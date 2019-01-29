@@ -1,12 +1,15 @@
 package com.scissorboy.scissorboytest.viewmodel
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.*
+import com.scissorboy.scissorboytest.R
 import com.scissorboy.scissorboytest.interfaces.Webservice
 import com.scissorboy.scissorboytest.interfaces.callback
 import com.scissorboy.scissorboytest.interfaces.createRetrofit
 import com.scissorboy.scissorboytest.model.Movie
 import com.scissorboy.scissorboytest.model.User
+import com.scissorboy.scissorboytest.util.NoConnectivityException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
@@ -30,6 +33,8 @@ class MovieViewModel internal constructor (
             data.value = response?.body()
         }
         throwable.let {
+            if (it is NoConnectivityException)
+                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
             if (it != null) data.value = ArrayList()
         }
     }
@@ -39,7 +44,8 @@ class MovieViewModel internal constructor (
             if (isFavorite()) getFavoritedMovies()
         }
         throwable.let {
-
+            if (it is NoConnectivityException)
+                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
         }
     }
 

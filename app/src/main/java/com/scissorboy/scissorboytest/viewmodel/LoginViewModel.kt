@@ -1,14 +1,17 @@
 package com.scissorboy.scissorboytest.viewmodel
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.scissorboy.scissorboytest.R
 import com.scissorboy.scissorboytest.interfaces.Webservice
 import com.scissorboy.scissorboytest.interfaces.callback
 import com.scissorboy.scissorboytest.interfaces.createRetrofit
 import com.scissorboy.scissorboytest.model.User
+import com.scissorboy.scissorboytest.util.NoConnectivityException
 import com.scissorboy.scissorboytest.util.StaticObjects
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,12 +31,15 @@ class LoginViewModel internal constructor(
 
     private val getUserCallback = callback<List<User>> { response, throwable ->
         response.let {
-            data.value = response?.body()
-            if (data.value!!.isNotEmpty() && data.value!!.size == 1) StaticObjects.user = data.value!![0]
+            if (!response?.body().isNullOrEmpty()) {
+                data.value = response?.body()
+            }
+            if (data.value?.size == 1) StaticObjects.user = data.value!![0]
         }
         throwable.let {
+            if (it is NoConnectivityException)
+                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
             if (it != null) {
-                data.value = null
                 username = ""
             }
         }
@@ -47,6 +53,8 @@ class LoginViewModel internal constructor(
             data.value = users
         }
         throwable.let {
+            if (it is NoConnectivityException)
+                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
             if (it != null) data.value = null
         }
     }

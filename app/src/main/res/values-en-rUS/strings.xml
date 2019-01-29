@@ -18,4 +18,5 @@
     <string name="movie_unfavorited">Movie Unfavorited</string>
     <string name="unfavorite">Unfavorite</string>
     <string name="login_label">Login</string>
+    <string name="network_out_of_range">Please check your internet connection and try again</string>
 </resources>

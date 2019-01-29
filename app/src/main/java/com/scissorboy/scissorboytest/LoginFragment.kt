@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
     private fun subscribeUi(v: View) {
         viewModel.getUser().observe(viewLifecycleOwner, Observer { users ->
             if (userAction != -1) {
-                if (users.isEmpty()) {
+                if (users.isNullOrEmpty()) {
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setMessage(R.string.new_user)
                     builder.setPositiveButton(android.R.string.yes) { _, _ ->
