@@ -21,18 +21,19 @@ class MoviesListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentMoviesListBinding.inflate(inflater, container, false)
-        val username = StaticObjects.username
-        val factory = MovieViewModelFactory(username)
+        val user = StaticObjects.user
+        val factory = MovieViewModelFactory(user)
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
+        viewModel.clearMoviesGender()
 
         setHasOptionsMenu(true)
 
-        val adapter = MoviesAdapter()
+        val adapter = MoviesAdapter(viewModel)
         binding.movieList.adapter = adapter
         subscribeUi(adapter)
 
         val mainActivity = requireActivity() as MainActivity
-        if (!username.isEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, username)
+        if (user.username.isNotEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, user.username)
         mainActivity.navigation.visibility = View.VISIBLE
         return binding.root
     }
@@ -41,16 +42,6 @@ class MoviesListFragment : Fragment() {
         viewModel.getMovies().observe(viewLifecycleOwner, Observer { movies ->
             if (movies != null) adapter.submitList(movies)
         })
-    }
-
-    private fun updateData(movieGender: Int) {
-        with(viewModel) {
-            if (isFiltered()) {
-                clearMoviesGender()
-            } else {
-                setMoviesGender(movieGender)
-            }
-        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?) {

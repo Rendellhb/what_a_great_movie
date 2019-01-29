@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scissorboy.scissorboytest.model.Movie
+import com.scissorboy.scissorboytest.model.User
 
 fun AppCompatEditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object: TextWatcher {
@@ -42,6 +43,6 @@ fun parseMovieJson(jsonString: String): List<Movie> {
 
 class StaticObjects {
     companion object {
-        @JvmStatic lateinit var username: String
+        @JvmStatic lateinit var user: User
     }
 }

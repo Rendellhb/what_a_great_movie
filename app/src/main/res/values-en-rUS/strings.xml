@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WGM</string>
-    <string name="app_title" translatable="false">What a great movie!</string>
-    <string name="login" translatable="false">Login</string>
-    <string name="title_home" translatable="false">Home</string>
-    <string name="title_favorite" translatable="false">Notifications</string>
-    <string name="username" translatable="false">Username</string>
-    <string name="btn_go" translatable="false">Go!</string>
-    <string name="login_title" translatable="false">Type your username to access</string>
-    <string name="empty_not_allowed" translatable="false">Empty username is not allowed. Please use only numbers, letters and underscore. With maximum of 20 characters</string>
-    <string name="welcome_home" translatable="false">Welcome %s</string>
+    <string name="app_title">What a great movie!</string>
+    <string name="login">Login</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Notifications</string>
+    <string name="username">Username</string>
+    <string name="btn_go">Go!</string>
+    <string name="login_title">Type your username to access</string>
+    <string name="empty_not_allowed">Empty username is not allowed. Please use only numbers, letters and underscore. With maximum of 20 characters</string>
+    <string name="welcome_home">Welcome %s</string>
     <string name="movie_item_image">Movie image. Accessibility could come from server</string>
     <string name="favorite">Favorite</string>
     <string name="logout">Logout</string>
+    <string name="new_user">User nor found! Wish to create a new user?</string>
+    <string name="movie_favorited">Movie Favorited</string>
+    <string name="movie_unfavorited">Movie Unfavorited</string>
+    <string name="unfavorite">Unfavorite</string>
 </resources>

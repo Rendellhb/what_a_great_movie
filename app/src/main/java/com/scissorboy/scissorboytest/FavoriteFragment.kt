@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.scissorboy.scissorboytest.adapters.MoviesAdapter
 import com.scissorboy.scissorboytest.databinding.FragmentFavoriteBinding
 import com.scissorboy.scissorboytest.util.StaticObjects
-import com.scissorboy.scissorboytest.util.StaticObjects.Companion.username
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModel
 import com.scissorboy.scissorboytest.viewmodel.MovieViewModelFactory
 import kotlinx.android.synthetic.main.main_activity.*
@@ -22,30 +21,29 @@ class FavoriteFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
-        val username = StaticObjects.username
-        val factory = MovieViewModelFactory(username)
+        val user = StaticObjects.user
+        val factory = MovieViewModelFactory(user)
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
 
         setHasOptionsMenu(true)
 
-        val adapter = MoviesAdapter()
+        val adapter = MoviesAdapter(viewModel)
         binding.favoriteMovieList.adapter = adapter
+        viewModel.setMoviesGender(MovieViewModel.FAVORITED)
         subscribeUi(adapter)
 
         val mainActivity = requireActivity() as MainActivity
-        if (!username.isEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, username)
+        if (!user.username.isEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, user.username)
         mainActivity.navigation.visibility = View.VISIBLE
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mainActivity = requireActivity() as MainActivity
-        if (!username.isEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, username)
     }
 
     private fun subscribeUi(adapter: MoviesAdapter) {
-        viewModel.getMovies().observe(viewLifecycleOwner, Observer { movies ->
+        viewModel.getFavoritedMovies().observe(viewLifecycleOwner, Observer { movies ->
             if (movies != null) adapter.submitList(movies)
         })
     }

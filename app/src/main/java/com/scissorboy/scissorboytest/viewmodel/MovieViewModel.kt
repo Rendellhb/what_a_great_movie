@@ -5,6 +5,7 @@ import com.scissorboy.scissorboytest.interfaces.Webservice
 import com.scissorboy.scissorboytest.interfaces.callback
 import com.scissorboy.scissorboytest.interfaces.createRetrofit
 import com.scissorboy.scissorboytest.model.Movie
+import com.scissorboy.scissorboytest.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
@@ -12,7 +13,7 @@ import retrofit2.Retrofit
 
 
 class MovieViewModel internal constructor (
-    private val username: String
+    private val user: User
 ) : ViewModel() {
     private var webservice: Webservice
     private var retrofit: Retrofit = createRetrofit()
@@ -28,6 +29,15 @@ class MovieViewModel internal constructor (
         }
         throwable.let {
             if (it != null) data.value = ArrayList()
+        }
+    }
+
+    private val callbackFavoriteUnfavorite = callback<Movie> { response, throwable ->
+        response.let {
+
+        }
+        throwable.let {
+
         }
     }
 
@@ -62,9 +72,23 @@ class MovieViewModel internal constructor (
 
     fun getFavoritedMovies() : LiveData<List<Movie>> {
         viewModelScope.run {
-            webservice.getFavoriteMovies(username).enqueue(callbackImpl)
+            webservice.getFavoriteMovies(user.id!!).enqueue(callbackImpl)
+
+            return data
         }
-        return data
+    }
+
+    fun favoriteMovie(movieId: String) {
+        viewModelScope.run {
+            webservice.favoriteMovie(user.id!!, movieId).enqueue(callbackFavoriteUnfavorite)
+        }
+    }
+
+    fun unfavoriteMovie(movieId: String) {
+        viewModelScope.run {
+            webservice.unfavoriteMovie(user.id!!, movieId).enqueue(callbackFavoriteUnfavorite)
+        }
+        getFavoritedMovies()
     }
 
     fun getMovies() = movieList
@@ -77,9 +101,10 @@ class MovieViewModel internal constructor (
         moviesGender.value = ALL
     }
 
-    fun isFiltered() = moviesGender.value != ALL
+    fun isFavorite() = moviesGender.value != ALL
 
     companion object {
-        private const val ALL = -1
+        const val ALL = -1
+        const val FAVORITED = 1
     }
 }

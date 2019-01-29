@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.scissorboy.scissorboytest.MoviesListFragmentDirections
+import com.scissorboy.scissorboytest.R
 import com.scissorboy.scissorboytest.databinding.ListItemMovieBinding
 import com.scissorboy.scissorboytest.model.Movie
+import com.scissorboy.scissorboytest.viewmodel.MovieViewModel
 
-class MoviesAdapter : ListAdapter<Movie, ViewHolder>(MovieDiffCallback()) {
+class MoviesAdapter (private val viewModel: MovieViewModel) : ListAdapter<Movie, ViewHolder>(MovieDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ListItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -19,21 +21,32 @@ class MoviesAdapter : ListAdapter<Movie, ViewHolder>(MovieDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = getItem(position)
         holder.apply {
-            bind(createDetailOnClickListener(movie.movieId), movie)
+            val favoriteValue = when (viewModel.isFavorite()) {
+                true -> holder.itemView.context.getString(R.string.unfavorite)
+                false -> holder.itemView.context.getString(R.string.favorite)
+            }
+            bind(createDetailOnClickListener(movie), createFavoriteButtonOnClickListener(movie.movieId), movie, favoriteValue)
             itemView.tag = movie
         }
     }
 
-    private fun createDetailOnClickListener(movieId: String): View.OnClickListener {
+    private fun createDetailOnClickListener(movie: Movie): View.OnClickListener {
         return View.OnClickListener {
-            val directions = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailFragment()
+            val directions = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailFragment(movie)
             it.findNavController().navigate(directions)
         }
     }
 
-    private fun createFavoriteOnClickListener(moviesId: String): View.OnClickListener {
-        return View.OnClickListener {
-            //TODO Create a favorited movie
+    private fun createFavoriteButtonOnClickListener(movieId: String): View.OnClickListener {
+        return when(viewModel.isFavorite()) {
+            true ->
+                View.OnClickListener {
+                    viewModel.unfavoriteMovie(movieId)
+                }
+            false ->
+                View.OnClickListener {
+                    viewModel.favoriteMovie(movieId)
+                }
         }
     }
 }
@@ -41,11 +54,12 @@ class MoviesAdapter : ListAdapter<Movie, ViewHolder>(MovieDiffCallback()) {
 class ViewHolder(
     private val binding: ListItemMovieBinding
 ) : RecyclerView.ViewHolder(binding.root) {
-
-    fun bind(listener: View.OnClickListener, item: Movie) {
+    fun bind(itemListener: View.OnClickListener, buttonListener: View.OnClickListener, item: Movie, favoriteValue: String) {
         binding.apply {
-            clickListener = listener
+            clickListener = itemListener
+            favoriteClickListener = buttonListener
             movie = item
+            this.favoriteValue = favoriteValue
             executePendingBindings()
         }
     }

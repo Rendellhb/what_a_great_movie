@@ -8,8 +8,14 @@
                 name="clickListener"
                 type="android.view.View.OnClickListener" />
         <variable
+                name="favoriteClickListener"
+                type="android.view.View.OnClickListener" />
+        <variable
                 name="movie"
                 type="com.scissorboy.scissorboytest.model.Movie"/>
+        <variable
+                name="favoriteValue"
+                type="String"/>
     </data>
     
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,13 +57,14 @@
 
         <Button
                 android:id="@+id/movie_item_favorite"
-                android:layout_width="110dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_normal"
                 android:layout_marginEnd="@dimen/margin_normal"
                 app:layout_constraintLeft_toRightOf="@id/movie_item_image"
                 app:layout_constraintTop_toBottomOf="@id/movie_item_title"
-                android:text="@string/favorite"
+                android:onClick="@{favoriteClickListener}"
+                android:text="@{favoriteValue}"
                 app:layout_constraintWidth_percent="0.4"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

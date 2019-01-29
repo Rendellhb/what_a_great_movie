@@ -1,11 +1,12 @@
 package com.scissorboy.scissorboytest.model
 
+import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("id") val id: String,
+    @SerializedName("id") @Nullable val id: String?,
     @SerializedName("username") val username: String,
-    @SerializedName("created_at") val created_at: String,
-    @SerializedName("updated_at") val updated_at: String,
-    @SerializedName("url") val url: String
+    @SerializedName("created_at") @Nullable val created_at: String?,
+    @SerializedName("updated_at") @Nullable val updated_at: String?,
+    @SerializedName("url") @Nullable val url: String?
 )

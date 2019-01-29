@@ -1,7 +1,34 @@
 package com.scissorboy.scissorboytest.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Genres (
     @SerializedName("name") val name: String
-)
+): Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readString()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(name)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Genres> {
+        override fun createFromParcel(parcel: Parcel): Genres {
+            return Genres(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Genres?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+    override fun toString(): String {
+        return name
+    }
+}

@@ -7,18 +7,26 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface Webservice {
-    @GET("api/users?username={username}")
-    fun checkUser(@Path("username") username: String) : Call<User>
+    @GET("api/users")
+    fun checkUser(@Query("username") username: String) : Call<List<User>>
+
+    @POST("api/users.json")
+    fun createUser(@Body user: User) : Call<User>
 
     @GET("api/movies")
     fun getMovies() : Call<List<Movie>>
 
-    @GET("api/users/{username}/movies")
-    fun getFavoriteMovies(@Path("username") username: String) : Call<List<Movie>>
+    @GET("api/users/{userId}/movies")
+    fun getFavoriteMovies(@Path("userId") userId: String) : Call<List<Movie>>
+
+    @GET("/api/users/{userId}/movies/{movieId}/favorite")
+    fun favoriteMovie(@Path("userId") userId: String, @Path("movieId") movieId: String): Call<Movie>
+
+    @GET("/api/users/{userId}/movies/{movieId}/unfavorite")
+    fun unfavoriteMovie(@Path("userId") userId: String, @Path("movieId") movieId: String): Call<Movie>
 }
 
 
