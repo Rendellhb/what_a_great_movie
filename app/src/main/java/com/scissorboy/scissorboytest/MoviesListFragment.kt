@@ -22,7 +22,7 @@ class MoviesListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentMoviesListBinding.inflate(inflater, container, false)
         val user = StaticObjects.user
-        val factory = MovieViewModelFactory(user)
+        val factory = MovieViewModelFactory(user, requireContext())
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
 
         setHasOptionsMenu(true)

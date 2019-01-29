@@ -2,6 +2,7 @@ package com.scissorboy.scissorboytest
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -27,12 +28,21 @@ class MovieDetailFragment: Fragment() {
             executePendingBindings()
         }
 
+        setHasOptionsMenu(true)
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.supportActionBar?.title = ""
+
         return binding.root
     }
 
     override fun onResume() {
         requireActivity().navigation.visibility = View.GONE
         super.onResume()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        menu?.findItem(R.id.logout)?.isVisible = false
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onPause() {

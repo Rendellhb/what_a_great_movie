@@ -36,7 +36,7 @@
     <fragment
             android:id="@+id/movieDetailFragment"
             android:name="com.scissorboy.scissorboytest.MovieDetailFragment"
-            android:label="MovieDetailFragment"
+            android:label=""
             tools:layout="@layout/fragment_movie_detail">
 
         <argument

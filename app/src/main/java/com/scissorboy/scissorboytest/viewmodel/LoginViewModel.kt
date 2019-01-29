@@ -1,5 +1,6 @@
 package com.scissorboy.scissorboytest.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,10 +16,11 @@ import kotlinx.coroutines.Job
 import retrofit2.Retrofit
 
 class LoginViewModel internal constructor(
+    private val context: Context
 ) : ViewModel() {
     private var username: String = ""
     private var webservice: Webservice
-    private var retrofit: Retrofit = createRetrofit()
+    private var retrofit: Retrofit = createRetrofit(context)
     private val user = MediatorLiveData<List<User>>()
     private val data = MutableLiveData<List<User>>()
     private val viewModelJob = Job()
@@ -74,9 +76,5 @@ class LoginViewModel internal constructor(
 
             return data
         }
-    }
-
-    fun clearUser() {
-        StaticObjects.user = User(null, "" , null, null, null)
     }
 }

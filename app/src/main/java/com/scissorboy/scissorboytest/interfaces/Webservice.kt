@@ -1,13 +1,17 @@
 package com.scissorboy.scissorboytest.interfaces
 
+import android.content.Context
 import com.scissorboy.scissorboytest.model.Movie
 import com.scissorboy.scissorboytest.model.User
+import com.scissorboy.scissorboytest.util.ConnectivityInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+
 
 interface Webservice {
     @GET("api/users")
@@ -29,9 +33,12 @@ interface Webservice {
     fun unfavoriteMovie(@Path("userId") userId: String, @Path("movieId") movieId: String): Call<Movie>
 }
 
-
-fun createRetrofit(): Retrofit {
+fun createRetrofit(context: Context): Retrofit {
+    val client = OkHttpClient.Builder()
+        .addInterceptor(ConnectivityInterceptor(context))
+        .build()
     return Retrofit.Builder()
+        .client(client)
         .baseUrl("http://46.101.218.241/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()

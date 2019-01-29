@@ -27,7 +27,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         (activity as MainActivity).supportActionBar?.title = getString(R.string.app_title)
 
-        val factory = LoginViewModelFactory()
+        val factory = LoginViewModelFactory(requireContext())
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         val binding = FragmentLoginBinding.inflate(inflater, container, false)
         subscribeUi(binding.root)

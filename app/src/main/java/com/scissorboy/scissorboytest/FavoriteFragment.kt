@@ -22,7 +22,7 @@ class FavoriteFragment: Fragment() {
         val binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
         val user = StaticObjects.user
-        val factory = MovieViewModelFactory(user)
+        val factory = MovieViewModelFactory(user, requireContext())
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
 
         setHasOptionsMenu(true)

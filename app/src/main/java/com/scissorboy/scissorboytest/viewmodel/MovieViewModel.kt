@@ -1,5 +1,6 @@
 package com.scissorboy.scissorboytest.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.*
 import com.scissorboy.scissorboytest.interfaces.Webservice
 import com.scissorboy.scissorboytest.interfaces.callback
@@ -13,10 +14,11 @@ import retrofit2.Retrofit
 
 
 class MovieViewModel internal constructor (
-    private val user: User
+    private val user: User,
+    private val context: Context
 ) : ViewModel() {
     private var webservice: Webservice
-    private var retrofit: Retrofit = createRetrofit()
+    private var retrofit: Retrofit = createRetrofit(context)
     private val movieList = MediatorLiveData<List<Movie>>()
     private val data = MutableLiveData<List<Movie>>()
     private val moviesGender = MutableLiveData<Int>()
