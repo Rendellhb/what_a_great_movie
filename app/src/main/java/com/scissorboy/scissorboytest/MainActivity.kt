@@ -12,6 +12,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.scissorboy.scissorboytest.databinding.MainActivityBinding
+import com.scissorboy.scissorboytest.model.User
+import com.scissorboy.scissorboytest.util.StaticObjects
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 val options: NavOptions = NavOptions.Builder()
                     .setPopUpTo(R.id.loginFragment, true)
                     .build()
+                StaticObjects.user = User(null, "" , null, null, null)
                 navController.navigate(R.id.loginFragment,null , options)
             }
         }

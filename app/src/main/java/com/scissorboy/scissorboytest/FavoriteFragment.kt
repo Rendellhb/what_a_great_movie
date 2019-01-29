@@ -29,7 +29,6 @@ class FavoriteFragment: Fragment() {
 
         val adapter = MoviesAdapter(viewModel)
         binding.favoriteMovieList.adapter = adapter
-        viewModel.setMoviesGender(MovieViewModel.FAVORITED)
         subscribeUi(adapter)
 
         val mainActivity = requireActivity() as MainActivity
@@ -38,8 +37,9 @@ class FavoriteFragment: Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
+        viewModel.setMoviesGender(MovieViewModel.FAVORITED)
     }
 
     private fun subscribeUi(adapter: MoviesAdapter) {

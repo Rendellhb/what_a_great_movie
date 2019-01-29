@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.scissorboy.scissorboytest.FavoriteFragmentDirections
 import com.scissorboy.scissorboytest.MoviesListFragmentDirections
 import com.scissorboy.scissorboytest.R
 import com.scissorboy.scissorboytest.databinding.ListItemMovieBinding
@@ -32,8 +33,13 @@ class MoviesAdapter (private val viewModel: MovieViewModel) : ListAdapter<Movie,
 
     private fun createDetailOnClickListener(movie: Movie): View.OnClickListener {
         return View.OnClickListener {
-            val directions = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailFragment(movie)
-            it.findNavController().navigate(directions)
+            if(viewModel.isFavorite()) {
+                val directions = FavoriteFragmentDirections.actionFavoriteFragmentToMovieDetailFragment(movie)
+                it.findNavController().navigate(directions)
+            } else {
+                val directions = MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailFragment(movie)
+                it.findNavController().navigate(directions)
+            }
         }
     }
 

@@ -24,7 +24,6 @@ class MoviesListFragment : Fragment() {
         val user = StaticObjects.user
         val factory = MovieViewModelFactory(user)
         viewModel = ViewModelProviders.of(this, factory).get(MovieViewModel::class.java)
-        viewModel.clearMoviesGender()
 
         setHasOptionsMenu(true)
 
@@ -36,6 +35,11 @@ class MoviesListFragment : Fragment() {
         if (user.username.isNotEmpty()) mainActivity.supportActionBar?.title = getString(R.string.welcome_home, user.username)
         mainActivity.navigation.visibility = View.VISIBLE
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.clearMoviesGender()
     }
 
     private fun subscribeUi(adapter: MoviesAdapter) {

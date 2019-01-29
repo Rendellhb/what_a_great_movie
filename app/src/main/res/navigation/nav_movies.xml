@@ -46,6 +46,10 @@
     <fragment
               android:id="@+id/favoriteFragment"
               android:name="com.scissorboy.scissorboytest.FavoriteFragment"
-              tools:layout="@layout/fragment_favorite"/>
+              tools:layout="@layout/fragment_favorite">
+        <action
+                android:id="@+id/action_favoriteFragment_to_movieDetailFragment"
+                app:destination="@id/movieDetailFragment"/>
+    </fragment>
 
 </navigation>

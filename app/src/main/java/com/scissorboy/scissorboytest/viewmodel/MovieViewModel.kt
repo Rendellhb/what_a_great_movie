@@ -34,7 +34,7 @@ class MovieViewModel internal constructor (
 
     private val callbackFavoriteUnfavorite = callback<Movie> { response, throwable ->
         response.let {
-
+            if (isFavorite()) getFavoritedMovies()
         }
         throwable.let {
 
@@ -88,7 +88,6 @@ class MovieViewModel internal constructor (
         viewModelScope.run {
             webservice.unfavoriteMovie(user.id!!, movieId).enqueue(callbackFavoriteUnfavorite)
         }
-        getFavoritedMovies()
     }
 
     fun getMovies() = movieList
