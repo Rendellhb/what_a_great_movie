@@ -31,7 +31,7 @@ class LoginViewModel internal constructor(
 
     private val getUserCallback = callback<List<User>> { response, throwable ->
         response.let {
-            if (!response?.body().isNullOrEmpty()) {
+            if (response?.body() != null) {
                 data.value = response?.body()
             }
             if (data.value?.size == 1) StaticObjects.user = data.value!![0]
