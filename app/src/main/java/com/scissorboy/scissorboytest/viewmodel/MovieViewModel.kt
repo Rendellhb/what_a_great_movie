@@ -1,8 +1,10 @@
 package com.scissorboy.scissorboytest.viewmodel
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.*
+import androidx.navigation.Navigation
 import com.scissorboy.scissorboytest.R
 import com.scissorboy.scissorboytest.interfaces.Webservice
 import com.scissorboy.scissorboytest.interfaces.callback
@@ -13,6 +15,7 @@ import com.scissorboy.scissorboytest.util.NoConnectivityException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
+import retrofit2.HttpException
 import retrofit2.Retrofit
 
 
@@ -33,9 +36,8 @@ class MovieViewModel internal constructor (
             data.value = response?.body()
         }
         throwable.let {
-            if (it is NoConnectivityException)
-                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
             if (it != null) data.value = ArrayList()
+            treatExceptions(it)
         }
     }
 
@@ -49,8 +51,7 @@ class MovieViewModel internal constructor (
             }
         }
         throwable.let {
-            if (it is NoConnectivityException)
-                Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
+            treatExceptions(it)
         }
     }
 
@@ -73,6 +74,14 @@ class MovieViewModel internal constructor (
         }
 
         movieList.addSource(liveMoviesList, movieList::setValue)
+    }
+
+    fun treatExceptions(it: Throwable?) {
+        if (it is NoConnectivityException)
+            Toast.makeText(context, R.string.network_out_of_range, Toast.LENGTH_SHORT).show()
+        else if (it is HttpException && it.code() == 404) {
+            Navigation.findNavController(context as Activity, R.id.nav_host_fragment).navigate(R.id.loginFragment)
+        }
     }
 
     fun getAllMovies() : LiveData<List<Movie>> {
