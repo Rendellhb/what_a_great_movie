@@ -41,7 +41,12 @@ class MovieViewModel internal constructor (
 
     private val callbackFavoriteUnfavorite = callback<Movie> { response, throwable ->
         response.let {
-            if (isFavorite()) getFavoritedMovies()
+            if (isFavorite()){
+                getFavoritedMovies()
+                Toast.makeText(context, R.string.movie_unfavorited, Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, R.string.movie_favorited, Toast.LENGTH_SHORT).show()
+            }
         }
         throwable.let {
             if (it is NoConnectivityException)
